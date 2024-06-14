@@ -1,81 +1,156 @@
 
 (function () {
 
+    // const toolbox = {
+    //     kind: "categoryToolbox",
+    //     contents: [
+    //         {
+    //             "kind": "category",
+    //             "name": "Database",
+    //             "contents": [
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'connect_database',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'execute_query',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'insert_data',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'update_data',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'delete_data',
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             "kind": "category",
+    //             "name": "Logic",
+    //             "contents": [
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'handle_request',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'process_data',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'send_response',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'start_session',
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             "kind": "category",
+    //             "name": "API",
+    //             "contents": [
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'make_api_call',
+    //                 },
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'handle_response',
+    //                 }
+    //             ]
+    //         },
+    //         {
+    //             "kind": "category",
+    //             "name": "JSON",
+    //             "contents": [
+    //                 {
+    //                     kind: 'block',
+    //                     type: 'parse_json',
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // }
     const toolbox = {
         kind: "categoryToolbox",
         contents: [
-            {
-                "kind": "category",
-                "name": "Database",
-                "contents": [
-                    {
-                        kind: 'block',
-                        type: 'connect_database',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'execute_query',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'insert_data',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'update_data',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'delete_data',
-                    }
-                ]
-            },
-            {
-                "kind": "category",
-                "name": "Logic",
-                "contents": [
-                    {
-                        kind: 'block',
-                        type: 'handle_request',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'process_data',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'send_response',
-                    },
-                    {
-                        kind: 'block',
-                        type: 'start_session',
-                    }
-                ]
-            },
+
             {
                 "kind": "category",
                 "name": "API",
                 "contents": [
                     {
                         kind: 'block',
-                        type: 'make_api_call',
+                        type: 'express_server',
                     },
                     {
-                        kind: 'block',
-                        type: 'handle_response',
+                        kind: "block",
+                        type: "express_route"
+                    },
+                    {
+                        kind: "block",
+                        type: "express_middleware"
+                    },
+                    {
+                        kind: "block",
+                        type: "express_response"
+                    },
+                    {
+                        kind: "block",
+                        type: "express_listen"
+                    },              
+                    // {
+                    //     kind: "block",
+                    //     type: "variables_set"
+                    // }
+                    // ,{
+                    //     kind: "block",
+                    //     type: "variable_get"
+                    // }
+                    {
+                        kind: "block",
+                        type: "variables_get_panda"
+                    }
+                    ,{
+                        kind: "block",
+                        type: "variables_set_panda"
                     }
                 ]
             },
             {
                 "kind": "category",
-                "name": "JSON",
+                "name": "Variables",
                 "contents": [
                     {
-                        kind: 'block',
-                        type: 'parse_json',
+                        "kind": "block",
+                        "type": "variable_get"
+                    },
+                    // {
+                    //     "kind": "block",
+                    //     "type": "variables_set"
+                    // }
+                ]
+            },
+            {
+                "kind": "category",
+                "name": "Create",
+                "contents": [
+                    {
+                        "kind": "block",
+                        "type": "variables_set",
+                        "name": "Colours",
+                        "custom": "CREATE_TYPED_VARIABLE"
                     }
                 ]
             }
+
         ]
     }
 
@@ -85,7 +160,39 @@
         scrollbars: false,
         horizontalLayout: false,
         toolboxPosition: "start",
+        typedVariableModel: true
     });
+
+
+
+    const createFlyout = function (workspace) {
+        let xmlList = [];
+        // Add your button and give it a callback name.
+        const button = document.createElement('button');
+        button.setAttribute('text', 'Create Typed Variable');
+        button.setAttribute('callbackKey', 'callbackName');
+
+        xmlList.push(button);
+
+        // This gets all the variables that the user creates and adds them to the
+        // flyout.
+        const blockList = Blockly.VariablesDynamic.flyoutCategoryBlocks(workspace);
+        xmlList = xmlList.concat(blockList);
+        console.log(xmlList);
+        return xmlList;
+    };
+
+    workspace.registerToolboxCategoryCallback(
+        'CREATE_TYPED_VARIABLE',
+        createFlyout,
+    );
+
+    const typedVarModal = new TypedVariableModal(workspace, 'callbackName', [
+        ['PENGUIN', 'Penguin'],
+        ['GIRAFFE', 'Giraffe'],
+        ['PORT', 'Port'],
+    ]);
+    typedVarModal.init();
 
 
     //     // Function to generate and display Node.js code
@@ -135,6 +242,9 @@
         // ... Your code to save the generated code
         console.log('Save button clicked!');
     });
+
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ custom blocks js code here ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 })();

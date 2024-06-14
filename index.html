@@ -30,25 +30,29 @@
     <script src="script/main.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.35.0/ace.js"
-    integrity="sha512-VBSPPzA3vXv9TFRJtm9ZR4YAJM59ihY4K8+b4LtJenbKk7OfwbAR0v40IJICmfSA6t3caE49CYz9q7mkk/2YPg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-VBSPPzA3vXv9TFRJtm9ZR4YAJM59ihY4K8+b4LtJenbKk7OfwbAR0v40IJICmfSA6t3caE49CYz9q7mkk/2YPg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/msg/en.js"></script>
+    <script src="https://unpkg.com/@blockly/plugin-typed-variable-modal"></script>
+    <!-- <script src="../build/test_bundle.js"></script> -->
+    <script src="script/custom-blocks.js"></script>
+    <script src="script/main.js"></script>
+
     <script>
         // Create an Ace editor instance
         var editor = ace.edit("editor");
 
         // Set the editor's theme and mode
         editor.setTheme("ace/theme/monokai.js"); // Choose a theme from the 'theme' folder
-        editor.setModuleUrl("ace/theme/monokai", "https://github.com/ajaxorg/ace/blob/master/src/theme/monokai.js"); // Choose a theme from the 'theme' folder
+        // editor.setModuleUrl("ace/theme/monokai", "https://github.com/ajaxorg/ace/blob/master/src/theme/monokai.js"); // Choose a theme from the 'theme' folder
         editor.session.setMode("ace/mode/javascript"); // Choose a mode from the 'mode' folder 
     </script>
-
- 
-    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
-    <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
-    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
-    <script src="https://unpkg.com/blockly/msg/en.js"></script>
-    <script src="script/custom-blocks.js"></script>
-    <script src="script/main.js"></script>
 </body>
 
 </html>
